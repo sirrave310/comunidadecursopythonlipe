@@ -22,10 +22,11 @@ app.config['SECRET_KEY'] = '301d692f8fb0ed1c9e8b35699fb37acf'
 
 # 22. Banco de Dados para o Site
 # 54. Colocando o site no ar - Railway + GitHub
-if os.getenv('DATABASE_URL'):
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
-else:
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+# if os.getenv('DATABASE_URL'):
+#     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
+# else:
+#     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = '${{ Postgres.DATABASE_URL }}'
 database = SQLAlchemy(app)
 # 30. Login dos Usuários
 login_manager = LoginManager(app)
