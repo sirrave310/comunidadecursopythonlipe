@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<!-- 45. Ajeitando a HomePage - Feed de Posts -->
+    <div class="container mt-3">
+        <h1  style="color: red">Lip's IArts</h1>
+        <h3>Primeiro Site do Lipe</h3>
+        <hr>
+        {% for post in posts %}
+            <div class="row border mt-4 p-3 meupost">
+                <div class="col col-2">
+                    <!-- 46. Terminando Edição dos Posts -->
+                    <img src="{{ url_for('static', filename='fotos_perfil/{}'.format(post.autor.foto)) }}" class="rounded" width="200" ><br>
+                    <strong>{{ post.autor.usuario }}</strong>
+                    <div class="row justify-content-center mt-2">
+                         {% for curso in post.autor.cursos.split(';') %}
+                            <button type="button" class="btn btn-success mt-2" disabled>{{ curso }}</button>
+                         {% endfor %}
+                    </div>
+                </div>
+                <div class="col col-9 ms-2">
+                    <a style="text-decoration: none" href="{{ url_for('visualizar_post', post_id=post.id) }}">
+                        <h4>
+                            {{ post.titulo }}
+                            <small class="text-muted" style="font-size: 15px"> - Data: {{ post.data.strftime('%d/%m/%Y') }}</small>
+                        </h4>
+                    </a>
+                    <!-- uma das formas de quebrar linha: <pre>{{ post.corpo }}</pre>  -->
+                    <!-- 49. Data de Criação, Editar e Excluir Post -->
+                    <p>{{ post.corpo | replace('\n', '<br>')|safe }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

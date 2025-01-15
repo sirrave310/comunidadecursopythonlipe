@@ -1,0 +1,82 @@
+<!-- 36. Edição do Perfil -->
+{% extends 'perfil.html' %}
+
+{% block form_editar_perfil %}
+    <div class="container w-50">
+        <hr>
+        <div class="row">
+            <form method="POST" action="" class="border p-4 mt-2" enctype="multipart/form-data">
+                {{ form.csrf_token }}
+                <legend>Editar Perfil</legend>
+                <fieldset>
+                    <div class="form-group mt-2">
+                        {{ form.usuario.label(class="form-control-label") }}
+                        <!-- 21. Validações dos Campos dos Formulários -->
+                        {% if form.usuario.errors %}
+                            {{ form.usuario(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for erro in form.usuario.errors %}
+                                {{ erro }}
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                            {{ form.usuario(class="form-control") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group mt-2">
+                        {{ form.email.label(class="form-control-label") }}
+                        <!-- 21. Validações dos Campos dos Formulários -->
+                        {% if form.email.errors %}
+                            {{ form.email(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for erro in form.email.errors %}
+                                {{ erro }}
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                            {{ form.email(class="form-control") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-group mt-2">
+                        {{ form.foto_perfil.label }}<br>
+                        {{ form.foto_perfil(class="form-control-file") }}
+                        <!-- aqui é para validar se o usuário carregar um arquivo que não é imagem -->
+                        {% if form.foto_perfil.errors %}
+                            {% for error in form.foto_perfil.errors %}
+                                <span class="text-danger">{{ error }}</span><br>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <!-- 40. Revisando o Site e Adicionando Cursos no Form do Perfil -->
+                    <hr>
+                    <p>Cursos</p>
+                    <div class="form-group">
+                        {{ form.curso_excel(class="form-check-input") }}
+                        {{ form.curso_excel.label }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.curso_vba(class="form-check-input") }}
+                        {{ form.curso_vba.label }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.curso_powerbi(class="form-check-input") }}
+                        {{ form.curso_powerbi.label }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.curso_python(class="form-check-input") }}
+                        {{ form.curso_python.label }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.curso_ppt(class="form-check-input") }}
+                        {{ form.curso_ppt.label }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.curso_sql(class="form-check-input") }}
+                        {{ form.curso_sql.label }}
+                    </div>
+                </fieldset>
+                {{ form.botao_submit_confirmaredicao(class="btn btn-primary mt-2") }}
+            </form>
+        </div>
+    </div>
+{% endblock %}
