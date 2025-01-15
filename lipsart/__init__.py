@@ -41,7 +41,7 @@ bcrypt = Bcrypt(app)
 
 # 54. Colocando o site no ar - Railway + GitHub
 from lipsart import models
-engine = sqlalchemy.engine(app.config['SQLALCHEMY_DATABASE_URI'])
+engine = sqlalchemy.create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
 inspector = sqlalchemy.inspect(engine)
 if not inspector.has_table("usuario"):
     with app.app_context():
