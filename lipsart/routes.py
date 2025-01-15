@@ -57,7 +57,8 @@ def login():
     if form_criarconta.validate_on_submit() and 'botao_submit_criarconta' in request.form:
         # 27. Criando usuário no banco de dados com nosso formulário
         # 28. Criptografando a Senha do Usuário
-        senha_criptografada = bcrypt.generate_password_hash(form_criarconta.senha.data)
+        # 55. Testando o Site no ar e corrigindo problemas de deploy (.decode para utf-8 no bcrypt)
+        senha_criptografada = bcrypt.generate_password_hash(form_criarconta.senha.data).decode('utf-8')
         usuario_criado = Usuario(
             usuario=form_criarconta.usuario.data,
             email=form_criarconta.email.data,
