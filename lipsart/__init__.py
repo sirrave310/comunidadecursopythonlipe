@@ -11,6 +11,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 # 30. Login dos Usuários
 from flask_login import LoginManager
+# 54. Colocando o site no ar - Railway + GitHub
+import os
 
 
 app = Flask(__name__)
@@ -19,7 +21,11 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = '301d692f8fb0ed1c9e8b35699fb37acf'
 
 # 22. Banco de Dados para o Site
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+# 54. Colocando o site no ar - Railway + GitHub
+if os.getenv('DATABASE_URL'):
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
+else:
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 database = SQLAlchemy(app)
 # 30. Login dos Usuários
 login_manager = LoginManager(app)
