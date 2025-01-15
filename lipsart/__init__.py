@@ -13,6 +13,8 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 # 54. Colocando o site no ar - Railway + GitHub
 import os
+# 54. Colocando o site no ar - Railway + GitHub
+import sqlalchemy
 
 
 app = Flask(__name__)
@@ -36,6 +38,19 @@ login_manager.login_message_category = 'alert-info'
 
 # 28. Criptografando a Senha do Usuário
 bcrypt = Bcrypt(app)
+
+# 54. Colocando o site no ar - Railway + GitHub
+from lipsart import models
+engine = sqlalchemy.engine(app.config['SQLALCHEMY_DATABASE_URI'])
+inspector = sqlalchemy.inspect(engine)
+if not inspector.has_table("usuario"):
+    with app.app_context():
+        database.drop_all()
+        database.create_all()
+        print('Base de Dados criada')
+else:
+    print('Base de dados já existente')
+
 
 from lipsart import routes
 
